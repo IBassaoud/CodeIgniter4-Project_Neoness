@@ -29,7 +29,7 @@
           Login
           </button>
         </div>
-        <div class="flex items-center justify-between"><a class="text-indigo-500 hover:underline" href="http://localhost:8080/register">Sign
+        <div class="flex items-center justify-between"><a class="text-indigo-500 hover:underline" href="http://localhost:8008/register">Sign
             up!</a><a class="text-indigo-500 hover:underline" href="#">Forgot your password?</a></div>
       </form>
     </div>

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 
-class User extends BaseController
+class UserController extends BaseController
 {
     
 
@@ -21,18 +21,19 @@ class User extends BaseController
 
     public function index()
     {
-        $data['users'] = $this->db->getAll();
+        $data = $this->db->getAll();
         var_dump($data); 
         echo "<br>";
+        echo view('header/header');
+        echo view('authentification/login');
+        echo view('footer/footer');
 
-        // echo view('template/header/header');
-        // echo view('login');
-        // echo view('template/footer/footer');
     }
 
     public function getOneUser()
     {
-        $id = $_GET['id'];
-        return $this->db->get($id);
+        // $id = $_GET['id'];
+        $quer = $this->db->findBy(["id" => 1]);
+        var_dump($quer);
     }
 }

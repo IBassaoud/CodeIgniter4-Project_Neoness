@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> -->
-    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" /> -->
+    <link href="public/assets/css/style.css" rel="stylesheet">
     <script src="assets/js/main.js"></script>
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -21,7 +21,7 @@
 <body>
 <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded white:bg-gray-900">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-      <a href="http://localhost:8080/" class="flex items-center">
+      <a href="http://localhost:8008/" class="flex items-center">
           <img src="https://upload.wikimedia.org/wikipedia/fr/7/70/Logo_NEONESS.svg" class="mr-3 h-6 sm:h-9"/>
           <span class="self-center text-xl font-semibold whitespace-nowrap white:text-black">NeoNess</span>
       </a>
@@ -52,10 +52,10 @@
           </li>
 
             <li>
-            <a href="#" class="block py-2 pr-4 pl-3 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-blue-700 md:dark:hover:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Sign in</a>
+            <a href="http://localhost:8008/login" class="block py-2 pr-4 pl-3 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-blue-700 md:dark:hover:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Sign in</a>
           </li>
           <li>
-            <a href="#" class="block py-2 pr-4 pl-3 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-blue-700 md:dark:hover:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Register</a>
+            <a href="http://localhost:8008/register" class="block py-2 pr-4 pl-3 text-blue-700 rounded hover:bg-blue-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-blue-700 md:dark:hover:text-blue-400 dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Register</a>
           </li>
         </ul>
       </div>
