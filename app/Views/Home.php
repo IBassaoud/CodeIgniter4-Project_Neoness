@@ -1,2 +1,5 @@
-<?php echo phpinfo();?>
-<h2>Hellow world</h2>
+<h2>Hello, <?php 
+if(session()->get('firstname')){
+    echo session()->get('firstname') . " " . session()->get('lastname');
+    };
+    ?></h2>

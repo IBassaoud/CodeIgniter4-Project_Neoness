@@ -6,21 +6,33 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table = 'USERS';
+    protected $allowedFields = array('email','password','firstname','lastname','phone','age','weight','height','weight_target','bmi');
+    protected $beforeInsert = ['beforeInsert'];
+    protected $beforeUpdate = ['beforeUpdate'];
     
-    public function getAll()
+    // public function getAll()
+    // {
+    //     return $this->findAll();
+    // }
+
+    public function beforeInsert(array $data)
     {
-        return $this->findAll();
+        $data = $this->passwordHash($data);
+        return $data;
     }
 
-    public function get($id)
+    public function beforeUpdate(array $data)
     {
-        // here we select just the age column
-        $this->select('*');
-        $this->where('id', $id);
-        $q = $this->get('USERS');
-        return $q->result_array();
-        // return $this->get_where(TRUE, $id);
+        $data = $this->passwordHash($data);
+        return $data;
     }
 
+    public function passwordHash(array $data)
+    {
+        if (isset($data['data']['password'])){
+            $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_ARGON2I);
+            return $data;
+        }
+    }
 
 }
