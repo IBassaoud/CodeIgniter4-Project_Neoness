@@ -1,3 +1,14 @@
+<?php
+// Set the appropriate title for each requested ressource
+$segment = service('uri');
+$segmentTitle = $segment->getSegment(1);
+if($segmentTitle == ''){
+  $titlePage = 'Login';
+} else {
+  $titlePage = ucfirst($segmentTitle);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> -->
+    <link rel="icon" type="ico" href="public/favicon.ico">
     <link rel="stylesheet" href="node_modules/flowbite/dist/flowbite.min.css" />
     <link href="public/assets/css/style.css" rel="stylesheet">
     <!-- <link href="node_modules/flowbite/dist/flowbite.min.css" rel="stylesheet"> -->
@@ -18,13 +30,13 @@
     }
     </style>
 
-    <title>NeoNess</title>
+    <title>NeoNess | <?= $titlePage ?></title>
 </head>
 <body>
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded white:bg-gray-900">
+<nav class="bg-black border-gray-200 px-2 sm:px-4 py-2.5 rounded white:bg-gray-900">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
       <a href="http://localhost:8008/" class="flex items-center">
-          <img src="https://upload.wikimedia.org/wikipedia/fr/7/70/Logo_NEONESS.svg" class="mr-3 h-6 sm:h-9"/>
+          <img src="public/assets/images/logo_neoness.png" class="mr-3 h-6 sm:h-9"/>
           <span class="self-center text-xl font-semibold whitespace-nowrap white:text-black">NeoNess</span>
       </a>
       <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 white:text-gray-400 white:hover:bg-gray-700 white:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -50,7 +62,7 @@
             <a href="coaching" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-black dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent">Coaching</a>
           </li>
           <li>
-            <a href="formule" class="block py-2 pr-4 pl-3 text-red-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-600 md:p-0 dark:text-red-600 md:dark:hover:text-red-700 dark:hover:bg-red-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Formules</a>
+            <a href="formules" class="block py-2 pr-4 pl-3 text-red-600 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-red-600 md:p-0 dark:text-red-600 md:dark:hover:text-red-700 dark:hover:bg-red-700 dark:hover:text-white md:dark:hover:bg-transparent" aria-current="page">Formules</a>
           </li>
           
           <?php

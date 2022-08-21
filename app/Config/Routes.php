@@ -61,8 +61,8 @@ $routes->get('clubs', 'ClubsController::index');
 // Clubs route
 $routes->get('coaching', 'CoachingController::index');
 
-// formule route
-$routes->get('formule', 'FormuleController::index');
+// formules route
+$routes->get('formules', 'FormulesController::index');
 
 
 /*

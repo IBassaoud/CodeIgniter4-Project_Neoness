@@ -29,10 +29,10 @@ class UserModel extends Model
 
     public function passwordHash(array $data)
     {
-        if (isset($data['data']['password'])){
+        if (isset($data['data']['password']) && $data['data']['password'] != ''){
             $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_ARGON2I);
-            return $data;
         }
+        return $data;
     }
 
 }

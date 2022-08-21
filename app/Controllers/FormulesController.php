@@ -1,7 +1,7 @@
 <?php
 namespace App\Controllers;
 
-class FormuleController extends BaseController
+class FormulesController extends BaseController
 {
     public function index()
     {

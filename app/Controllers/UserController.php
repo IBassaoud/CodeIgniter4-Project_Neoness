@@ -75,8 +75,8 @@ class UserController extends BaseController
             // If true, do the validation 
             $verification = [
                 "email" => "required|min_length[5]|max_length[255]|valid_email|is_unique[USERS.email]",
-                "password" => "matches[repeat_password]",
-                "repeat_password" => "required|min_length[3]|max_length[255]",
+                "password" => "required|min_length[3]|max_length[255]",
+                "repeat_password" => "matches[password]",
                 "firstname" => "required|min_length[3]|max_length[255]",
                 "lastname" => "required|min_length[3]|max_length[255]",
                 "age" => "max_length[3]",
@@ -119,19 +119,15 @@ class UserController extends BaseController
 
     public function profile()
     {
-        // // Check if an user is logged if not redirect to the login page
-        // if (!session()->get('isLoggedIn')){
-        //     redirect()->to('/');
-        // }
-
         $data = array();
         helper(['form']);
         $model = new UserModel();
+        $id = session()->get('id');
+        $data['user'] = $model->where('id', $id)->first();
 
         if ($this->request->getMethod() == 'post'){
             // If true, do the validation 
             $verification = [
-                // check if the firstname & lastname are submitted in case User didn't want to change the password
                 "firstname" => "required|min_length[3]|max_length[255]",
                 "lastname" => "required|min_length[3]|max_length[255]",
                 "age" => "required|max_length[3]",
@@ -141,16 +137,30 @@ class UserController extends BaseController
                 "weight_target" => "max_length[5]"
             ];
 
+            $errorsUpdate = [
+                'current_password' => [
+                    'validateUser' => 'Current password is incorrect'
+                ],
+            ];
+
             if($this->request->getPost('password') != ''){
+                $currentPass = $data['user']['password'];
+                $pass = $this->request->getPost('current_password');
+                $verify_pass = password_verify($pass, $currentPass);
+                
                 $verification['password'] = "required|min_length[3]|max_length[255]";
-                $verification['repeat_password'] = "required|min_length[3]|max_length[255]";
+                $verification['repeat_password'] = "matches[password]";
+                
+                if(!$verify_pass){
+                    $verification["current_password"] = "validateUser[current_password]";
+                }
             }
 
-            if (! $this->validate($verification)){
+            if (! $this->validate($verification,$errorsUpdate)){
                 $data['validation'] = $this->validator;
             } else {
-                $newUser = [
-                    'id' => session()->get('id'),
+                $updateUser = array(
+                    "id" => $id,
                     "firstname" => $this->request->getPost('firstname'),
                     "lastname" => $this->request->getPost('lastname'),
                     "age" => $this->request->getPost('age'),
@@ -159,13 +169,22 @@ class UserController extends BaseController
                     "weight" => $this->request->getPost('weight'),
                     "weight_target" => $this->request->getPost('weight_target'),
                     "bmi" => $this->request->getPost('bmi')
-                ];
+                );
 
-                if(! $this->request->getPost('password') != ''){
-                    $newUser['password'] = $this->request->getPost('password');
-                    $newUser['repeat_password'] = $this->request->getPost('repeat_password');
+                if($this->request->getPost('password') != ''){
+                    $updateUser['password'] = $this->request->getPost('password');
                 }
-                $model->save($newUser);
+
+                // echo "<pre>";
+                // var_dump($_POST);
+                // var_dump($updateUser);
+                // echo "</pre>";
+                // exit;
+                // $model->table('USERS');
+                // $model->where(['id' => $id]);
+                // $model->set($updateUser);
+                $model->save($updateUser); //erreur ici si je ne renseigne pas le password WTF ????????????????
+                // $model->save($updateUser);
                 $session = session();
                 $session->setFlashdata('success','Successfully updated');
                 return redirect()->to('profile');
@@ -173,7 +192,6 @@ class UserController extends BaseController
         }
 
         //our user
-        $data['user'] = $model->where('id', session()->get('id'))->first();
         echo view('header/header', $data);
         echo view('user/profile');
         echo view('footer/footer');
