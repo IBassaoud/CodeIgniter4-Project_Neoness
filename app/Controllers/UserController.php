@@ -173,4 +173,10 @@ class UserController extends BaseController
         echo view('user/profile');
         echo view('footer/footer');
     }
+
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/');
+    }
 }

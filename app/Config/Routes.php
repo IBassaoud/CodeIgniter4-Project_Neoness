@@ -46,6 +46,7 @@ $routes->get('user', 'UserController::index');
 $routes->match(['get','post'],'/', 'UserController::index');
 $routes->match(['get','post'],'register', 'UserController::register');
 $routes->match(['get','post'],'profile', 'UserController::profile');
+$routes->get('logout', 'UserController::logout');
 
 /*
  * --------------------------------------------------------------------
