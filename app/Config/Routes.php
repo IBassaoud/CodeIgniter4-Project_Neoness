@@ -37,16 +37,33 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('home', 'Home::index');
 $routes->get('helloworld', '\App\Controllers\Helloworld::getindex');
-$routes->get('user', 'UserController::index');
+// $routes->get('user', 'UserController::index');
 
 /*
 * CRUD - User data
 */
 // $routes->get('/', 'UserController::index');
-$routes->match(['get','post'],'/', 'UserController::index');
-$routes->match(['get','post'],'register', 'UserController::register');
-$routes->match(['get','post'],'profile', 'UserController::profile');
+$routes->match(['get','post'],'/', 'UserController::index', ['filter' => "NoAuthFilter"]);
+$routes->match(['get','post'],'register', 'UserController::register', ['filter' => "NoAuthFilter"]);
+$routes->match(['get','post'],'profile', 'UserController::profile', ['filter' => "AuthFilter"]);
 $routes->get('logout', 'UserController::logout');
+$routes->get('dashboard', 'DashboardController::index', ['filter' => "AuthFilter"]);
+
+// Activites route
+$routes->get('activities', 'ActivitiesController::index');
+
+// News route
+$routes->get('news', 'NewsController::index');
+
+// Clubs route
+$routes->get('clubs', 'ClubsController::index');
+
+// Clubs route
+$routes->get('coaching', 'CoachingController::index');
+
+// formule route
+$routes->get('formule', 'FormuleController::index');
+
 
 /*
  * --------------------------------------------------------------------

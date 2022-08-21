@@ -8,6 +8,8 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\AuthFilter;
+use App\Filters\NoAuthFilter;
 
 class Filters extends BaseConfig
 {
@@ -23,6 +25,9 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        // specify my new filters 
+        'AuthFilter' => AuthFilter::class,
+        'NoAuthFilter' => NoAuthFilter::class,
     ];
 
     /**

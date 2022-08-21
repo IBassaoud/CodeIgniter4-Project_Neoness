@@ -119,6 +119,11 @@ class UserController extends BaseController
 
     public function profile()
     {
+        // // Check if an user is logged if not redirect to the login page
+        // if (!session()->get('isLoggedIn')){
+        //     redirect()->to('/');
+        // }
+
         $data = array();
         helper(['form']);
         $model = new UserModel();
