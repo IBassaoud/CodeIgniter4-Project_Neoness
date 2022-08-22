@@ -43,6 +43,8 @@ $routes->get('helloworld', '\App\Controllers\Helloworld::getindex');
 * CRUD - User data
 */
 // $routes->get('/', 'UserController::index');
+$routes->get('users', 'UserController::getUsers');
+// $routes->get('users/::id', 'UserController::getOne');
 $routes->match(['get','post'],'/', 'UserController::index', ['filter' => "NoAuthFilter"]);
 $routes->match(['get','post'],'register', 'UserController::register', ['filter' => "NoAuthFilter"]);
 $routes->match(['get','post'],'profile', 'UserController::profile', ['filter' => "AuthFilter"]);

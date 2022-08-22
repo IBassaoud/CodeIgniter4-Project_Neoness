@@ -202,4 +202,24 @@ class UserController extends BaseController
         session()->destroy();
         return redirect()->to('/');
     }
+
+    public function getUsers()
+    {
+        $model = new UserModel();
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $data['users'] = $model->where('id',$id)->first();
+            $data['length'] = 1;
+
+        } else {
+            $data['users'] = $model->findAll();
+        }
+        // echo "<pre>";
+        // var_dump($data['users']);
+        // echo "</pre>";
+        // exit;
+        echo view('header/header',$data);
+        echo view('user/list');
+        echo view('footer/footer');
+    }
 }

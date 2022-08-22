@@ -1,5 +1,10 @@
-<h2>Hello, <?php 
+<h2>Hello
+<?php 
 if(session()->get('firstname')){
-    echo session()->get('firstname') . " " . session()->get('lastname');
+    echo ", " . session()->get('firstname') . " " . session()->get('lastname');
     };
-    ?></h2>
+if(isset($_GET['id'])){
+    echo "<br> mon id c'est le " . $_GET['id'];
+}
+?>
+</h2>

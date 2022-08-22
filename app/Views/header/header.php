@@ -7,6 +7,7 @@ if($segmentTitle == ''){
 } else {
   $titlePage = ucfirst($segmentTitle);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -17,9 +18,7 @@ if($segmentTitle == ''){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script> -->
     <link rel="icon" type="ico" href="public/favicon.ico">
-    <link rel="stylesheet" href="node_modules/flowbite/dist/flowbite.min.css" />
-    <link href="public/assets/css/style.css" rel="stylesheet">
-    <!-- <link href="node_modules/flowbite/dist/flowbite.min.css" rel="stylesheet"> -->
+    <link href="dist/tailwind.css" rel="stylesheet">
     <script src="public/assets/js/main.js"></script>
     
     <style>
@@ -33,9 +32,9 @@ if($segmentTitle == ''){
     <title>NeoNess | <?= $titlePage ?></title>
 </head>
 <body>
-<nav class="bg-black border-gray-200 px-2 sm:px-4 py-2.5 rounded white:bg-gray-900">
+<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded white:bg-gray-900">
     <div class="container flex flex-wrap justify-between items-center mx-auto">
-      <a href="http://localhost:8008/" class="flex items-center">
+      <a href="/" class="flex items-center">
           <img src="public/assets/images/logo_neoness.png" class="mr-3 h-6 sm:h-9"/>
           <span class="self-center text-xl font-semibold whitespace-nowrap white:text-black">NeoNess</span>
       </a>
