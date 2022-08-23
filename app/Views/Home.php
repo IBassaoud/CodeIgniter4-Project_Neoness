@@ -3,8 +3,11 @@
 if(session()->get('firstname')){
     echo ", " . session()->get('firstname') . " " . session()->get('lastname');
     };
-if(isset($_GET['id'])){
-    echo "<br> mon id c'est le " . $_GET['id'];
+if(isset($id)){
+    echo "<br> mon id c'est le " . $id;
+}
+if (isset($catch_phrase)){
+    echo $catch_phrase;
 }
 ?>
 </h2>

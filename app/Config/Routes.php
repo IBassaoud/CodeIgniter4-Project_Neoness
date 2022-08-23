@@ -35,6 +35,7 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+$routes->get('home/(:segment)', 'Home::index/$1');
 $routes->get('home', 'Home::index');
 $routes->get('helloworld', '\App\Controllers\Helloworld::getindex');
 // $routes->get('user', 'UserController::index');
@@ -43,17 +44,21 @@ $routes->get('helloworld', '\App\Controllers\Helloworld::getindex');
 * CRUD - User data
 */
 // $routes->get('/', 'UserController::index');
+$routes->get('users/(:segment)', 'UserController::getUser/$1');
 $routes->get('users', 'UserController::getUsers');
 // $routes->get('users/::id', 'UserController::getOne');
 $routes->match(['get','post'],'/', 'UserController::index', ['filter' => "NoAuthFilter"]);
 $routes->match(['get','post'],'register', 'UserController::register', ['filter' => "NoAuthFilter"]);
 $routes->match(['get','post'],'profile', 'UserController::profile', ['filter' => "AuthFilter"]);
 $routes->get('logout', 'UserController::logout');
+
+// routes dashboard
 $routes->get('dashboard', 'DashboardController::index', ['filter' => "AuthFilter"]);
 
 // Activites route
-$routes->get('activities', 'ActivitiesController::index');
-
+// $routes->get('activities', 'ActivitiesController::index');
+$routes->get('activities/(:segment)', 'ActivitiesController::getActivity/$1');
+$routes->get('activities', 'ActivitiesController::getActivities');
 // News route
 $routes->get('news', 'NewsController::index');
 

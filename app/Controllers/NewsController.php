@@ -7,9 +7,9 @@ class NewsController extends BaseController
     {
                 
         $data = array();
-        echo view('header/header');
-        echo "<h2>Big news bruh</h2>";
+        $data['catch_phrase'] = "<h2>Hey bruh, there are Big news in here</h2>";
+        echo view('template/header', $data);
         echo view('Home');
-        echo view('footer/footer');
+        echo view('template/footer');
     }
 }

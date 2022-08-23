@@ -33,24 +33,24 @@ function calculateBMI(){
 
     // If both input is valid, calculate the bmi
     else {
-        let userBIM = (weight / Math.pow( (height/100), 2 )).toFixed(1)
+        let userBMI = (weight / Math.pow( (height/100), 2 )).toFixed(1)
 
         // Dividing as per the bmi conditions
-        if (userBIM < 18.6){
-        bmi.value = userBIM;
-        bmiVal.value = userBIM;
+        if (userBMI < 18.6){
+        bmi.value = userBMI;
+        bmiVal.value = userBMI;
         p.innerHTML = `Under Weight 😒`;
         p.style.color = "#ffc44d"
-        } else if (userBIM >= 18.6 && userBIM < 24.9) {
-        bmi.value = userBIM
-        bmiVal.value = userBIM;
+        } else if (userBMI >= 18.6 && userBMI < 24.9) {
+        bmi.value = userBMI
+        bmiVal.value = userBMI;
         p.innerHTML = `Normal Weight 😍` 
         p.style.color = "#0be881"
         
         }
         else {
-            bmi.value = userBIM;
-            bmiVal.value = userBIM;
+            bmi.value = userBMI;
+            bmiVal.value = userBMI;
             p.innerHTML = `Over Weight 😮`
             p.style.color = "#ff884d" 
         }

@@ -28,8 +28,7 @@ class UserController extends BaseController
             if (! $this->validate($verification, $errors)){
                 $data['validation'] = $this->validator;
             } else {
-                // otherwise store the user in the database
-                $model = new UserModel();
+                $model = model(UserModel::class);
 
                 $user = $model->where('email', $this->request->getVar('email'))
                               ->first();
@@ -38,9 +37,9 @@ class UserController extends BaseController
                 return redirect()->to('home');
             }
         }
-        echo view('header/header', $data);
+        echo view('template/header', $data);
         echo view('authentification/login');
-        echo view('footer/footer');
+        echo view('template/footer');
     }
 
     private function setUserSession($user)
@@ -68,6 +67,10 @@ class UserController extends BaseController
     
     public function register()
     {
+        // echo "<pre>";
+        // var_dump($_POST);
+        // echo "</pre>";
+        // exit;
         $data = array();
         helper(['form']);
 
@@ -90,7 +93,7 @@ class UserController extends BaseController
                 $data['validation'] = $this->validator;
             } else {
                 // otherwise store the user in the database
-                $model = new UserModel();
+                $model = model(UserModel::class);
 
                 $newUser = [
                     "email" => $this->request->getVar('email'),
@@ -111,9 +114,9 @@ class UserController extends BaseController
             }
         }
 
-        echo view('header/header', $data);
+        echo view('template/header', $data);
         echo view('authentification/register');
-        echo view('footer/footer');
+        echo view('template/footer');
 
     }
 
@@ -121,7 +124,8 @@ class UserController extends BaseController
     {
         $data = array();
         helper(['form']);
-        $model = new UserModel();
+        
+        $model = model(UserModel::class);
         $id = session()->get('id');
         $data['user'] = $model->where('id', $id)->first();
 
@@ -191,10 +195,9 @@ class UserController extends BaseController
             }
         }
 
-        //our user
-        echo view('header/header', $data);
+        echo view('template/header', $data);
         echo view('user/profile');
-        echo view('footer/footer');
+        echo view('template/footer');
     }
 
     public function logout()
@@ -203,23 +206,39 @@ class UserController extends BaseController
         return redirect()->to('/');
     }
 
-    public function getUsers()
+    public function getUser($id = null)
     {
-        $model = new UserModel();
+        $model = model(UserModel::class);
+
         if(isset($_GET['id'])){
             $id = $_GET['id'];
-            $data['users'] = $model->where('id',$id)->first();
-            $data['length'] = 1;
-
-        } else {
-            $data['users'] = $model->findAll();
         }
-        // echo "<pre>";
-        // var_dump($data['users']);
-        // echo "</pre>";
-        // exit;
-        echo view('header/header',$data);
-        echo view('user/list');
-        echo view('footer/footer');
+
+        if ($id != null){
+            $id = $id;
+        }
+
+        $data = $model->findUsers($id);
+
+        if (empty($data['users'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the user : ' . $id);
+        }
+
+        echo view('template/header',$data);
+        echo view('user/detail');
+        echo view('template/footer');
     }
+
+    public function getUsers()
+    {
+        $model = model(UserModel::class);
+
+        $data = $model->findUsers();
+
+        echo view('template/header',$data);
+        echo view('user/list');
+        echo view('template/footer');
+    }
+
+
 }

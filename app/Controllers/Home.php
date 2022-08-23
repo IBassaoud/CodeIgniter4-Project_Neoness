@@ -3,12 +3,14 @@ namespace App\Controllers;
 
 class Home extends BaseController
 {
-    public function index()
+    public function index($id = null)
     {
         $data = array();
-
-        echo view('header/header');
+        if ($id !== null){
+            $data['id'] = $id;
+        }
+        echo view('template/header', $data);
         echo view('Home');
-        echo view('footer/footer');
+        echo view('template/footer');
     }
 }
