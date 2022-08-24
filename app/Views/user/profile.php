@@ -13,7 +13,7 @@
 ?>
 <form action="<?= base_url('profile')?>" method="POST">
   <div class="relative z-0 mb-6 w-full group">
-      <input readonly value="<?= $user['email'] ?>" type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " >
+      <input readonly value="<?= set_value('email', session()->get('email')) ?>" type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " >
       <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email address</label>
   </div>
   <div class="relative z-0 mb-6 w-full group">
@@ -30,21 +30,21 @@
   </div>
   <div class="grid md:grid-cols-2 md:gap-6">
     <div class="relative z-0 mb-6 w-full group">
-        <input value="<?= set_value('firstname', $user['firstname']) ?>" type="text" name="firstname" id="firstname" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
+        <input value="<?= set_value('firstname', session()->get('firstname')) ?>" type="text" name="firstname" id="firstname" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
         <label for="firstname" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First name</label>
     </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input value="<?= set_value('lastname', $user['lastname']) ?>" type="text" name="lastname" id="lastname" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
+        <input value="<?= set_value('lastname', session()->get('lastname')); ?>" type="text" name="lastname" id="lastname" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
         <label for="lastname" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last name</label>
     </div>
   </div>
   <div class="grid md:grid-cols-2 md:gap-6">
     <div class="relative z-0 mb-6 w-full group">
-        <input value="<?= set_value('age', $user['age']) ?>" type="text" maxlength="3" name="age" id="age" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
+        <input value="<?= set_value('age', session()->get('age')); ?>" type="text" maxlength="3" name="age" id="age" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
         <label for="age" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Age</label>    
     </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input value="<?= set_value('phone', $user['phone']) ?>" type="tel" name="phone" id="phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
+        <input value="<?= set_value('phone', session()->get('phone')) ?>" type="tel" name="phone" id="phone" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" ">
         <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone</label>
     </div>
   </div>
@@ -52,7 +52,7 @@
   <div class="grid md:grid-cols-2 md:gap-6">
     <div class="relative z-0 mb-6 w-full group">
         <input 
-        value="<?= set_value('height', $user['height']) ?>" 
+        value="<?= set_value('height', session()->get('height')) ?>" 
         type="text" 
         placeholder=" " 
         maxlength="3" 
@@ -64,7 +64,7 @@
     </div>
     <div class="relative z-0 mb-6 w-full group">
         <input  
-        value="<?= set_value('weight', $user['weight']) ?>"
+        value="<?= set_value('weight', session()->get('weight')) ?>"
         type="text" 
         placeholder=" " 
         maxlength="5" 
@@ -79,7 +79,7 @@
   <div class="grid md:grid-cols-2 md:gap-6">
     <div class="relative z-0 mb-6 w-full group">
         <input 
-        value="<?= set_value('weight_target', $user['weight_target']) ?>"
+        value="<?= set_value('weight_target', session()->get('weight_target')) ?>"
         type="text" 
         placeholder=" " 
         maxlength="5" 
@@ -89,9 +89,9 @@
         <label for="weight_target" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Goal weight</label>    
     </div>
     <div class="relative z-0 mb-6 w-full group">
-        <input type ="hidden" name="bmi" id="bmi" value="<?= set_value("bmi_display", $user['bmi'])?>">
+        <input type ="hidden" name="bmi" id="bmi" value="<?= set_value("bmi", session()->get('bmi'))?>">
         <input 
-        value="<?= set_value("bmi_display", $user['bmi'])?>"
+        value="<?= set_value("bmi_display", session()->get('bmi'))?>"
         disabled
         placeholder=" " 
         id="bmi_display" 

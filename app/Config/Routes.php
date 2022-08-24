@@ -52,8 +52,13 @@ $routes->match(['get','post'],'register', 'UserController::register', ['filter' 
 $routes->match(['get','post'],'profile', 'UserController::profile', ['filter' => "AuthFilter"]);
 $routes->get('logout', 'UserController::logout');
 
-// routes dashboard
+// $routes->get('dashboard/::id', 'DashboardController::getOne');
 $routes->get('dashboard', 'DashboardController::index', ['filter' => "AuthFilter"]);
+$routes->match(['get','post'],'dashboard/login', 'DashboardController::login', ['filter' => "NoAuthFilter"]);
+$routes->match(['get','post'],'dashboard/profile', 'DashboardController::profile', ['filter' => "AuthFilter"]);
+$routes->get('dashboard/logout', 'DashboardController::logout');
+
+// routes dashboard
 
 // Activites route
 // $routes->get('activities', 'ActivitiesController::index');

@@ -11,7 +11,12 @@ class AuthFilter implements FilterInterface
     {
         // We want to check in case the user isn't logged in then redirect to login page
         if (! session()->get('isLoggedIn')){
-            return redirect()->to('/');
+            if (session()->get('role') == "Administrator"){
+                return redirect()->to('/dashboard');
+            } else {
+                return redirect()->to(base_url());
+            }
+            
         }
     }
 
