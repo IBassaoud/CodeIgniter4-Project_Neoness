@@ -195,17 +195,3 @@
    </div>
 
 
-
-
-
-<script>
-    let scrollElement = document.getElementsByClassName('overflow-y-scroll');
-
-    for (let i = 0; i < scrollElement.length; i++) {
-        console.log(scrollElement[i]);
-        scrollElement[i].setAttribute('style', 'scrollbar-width: none;')
-    }
-
-
-</script>
-

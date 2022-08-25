@@ -58,7 +58,32 @@ function calculateBMI(){
     
 }
 
+// scroll element
+let scrollElement = document.getElementsByClassName('overflow-y-scroll');
 
+for (let i = 0; i < scrollElement.length; i++) {
+    scrollElement[i].setAttribute('style', 'scrollbar-width: none;')
+}
 
 // Hover sidebar
+let mysidebar = document.getElementById('hover-sidebar');
+let elementHover = document.getElementsByClassName('element-hover-sidebar');
 
+mysidebar.addEventListener('mouseenter', function(){
+
+    for (let i = 0 ; i < elementHover.length ; i++) {
+        let elementVisibility = elementHover[i].style.visibility;
+        if (elementVisibility == "hidden"){
+            elementHover[i].style.visibility = "visible";
+        }
+    }
+})
+
+mysidebar.addEventListener('mouseleave', function(){
+    for (let i = 0 ; i < elementHover.length ; i++) {
+        let elementVisibility = elementHover[i].style.visibility;
+        if (elementVisibility == "visible"){
+            elementHover[i].style.visibility = "hidden";
+        }
+    }
+})

@@ -57,8 +57,9 @@
                             </td>
                             <td class="py-2 px-3 text-center">
                                 <div class="flex justify-center">
-                                    <form action="<?= base_url('home')?>" method="GET">
+                                    <form action="<?= base_url('/dashboard/users')?>" method="POST">
                                         <input type="hidden" name="id" value="<?= $user['id']?>">
+                                        <input type="hidden" name="action" value="visualize">
                                         <button type="submit">
                                             <div class="w-4 h-4 fill-current inline-block mr-2 transform hover:text-purple-500 hover:scale-110">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,8 +69,9 @@
                                             </div>
                                         </button>
                                     </form>
-                                    <form action="<?= base_url('home')?>" method="GET">
+                                    <form action="<?= base_url('/dashboard/users')?>" method="POST">
                                         <input type="hidden" name="id" value="<?= $user['id']?>">
+                                        <input type="hidden" name="action" value="edit">
                                         <button type="submit">
                                             <div class="w-4 h-4 fill-current inline-block mr-2 transform hover:text-purple-500 hover:scale-110">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,8 +80,9 @@
                                             </div>
                                         </button>
                                     </form>
-                                    <form action="<?= base_url('home')?>" method="GET">
+                                    <form action="<?= base_url('/dashboard/users')?>" method="POST">
                                         <input type="hidden" name="id" value="<?= $user['id']?>">
+                                        <input type="hidden" name="action" value="delete">
                                         <button type="submit"> 
                                             <a href=<?= base_url('home'.$user['id']);?> class="w-4 h-4 fill-current inline-block mr-2 transform hover:text-purple-500 hover:scale-110">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -99,3 +102,8 @@
             </div>
         </div>
     </div>
+    <?php if (session()->get('success')): ?>
+    <div class='text-center text-green-500 text-1xl font-bold'>
+    <?= session()->get('successDelete'); ?>
+    </div>
+<?php endif; ?>

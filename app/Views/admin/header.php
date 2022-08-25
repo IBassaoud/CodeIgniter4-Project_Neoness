@@ -6,7 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
    <link rel="icon" type="ico" href="public/favicon.ico">
-   <script src="public/assets/js/main.js"></script>
+   <script src="http://localhost:8008/public/assets/js/main.js" defer></script>
    
    <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -37,8 +37,8 @@
 </head>
 <body class="font-poppins antialiased">
 <div class="min-h-screen bg-gray-100 flex">
-<div class="sidebar min-h-screen w-[5.5rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg">
-  <div class="flex h-screen flex-col justify-between pt-2 pb-6">
+<div class="sidebar min-h-screen w-[5.5rem] overflow-hidden border-r hover:w-56 hover:bg-white hover:shadow-lg" id="hover-sidebar">
+  <div class="flex h-screen flex-col justify-between pt-2 pb-6" id="hover-sidebar-2">
     <div>
       <div class="w-max p-2.5 mx-auto">
         <img src="https://upload.wikimedia.org/wikipedia/fr/7/70/Logo_NEONESS.svg" class="w-16" alt="">
@@ -63,6 +63,7 @@
       </div>
 
       <?php
+         // TODO : All this code looks ugly please CLEAN IT later !!!!!!!!!!!!!
       $segment = service('uri');
       $segOne = $segment->getSegment(1); 
       $segTwo = $segment->getSegment(2); 
@@ -96,7 +97,7 @@
       if ($segTwo == 'settings'){
          $segSettings = true;
       }
-
+      // TODO : All this code looks ugly please CLEAN IT later !!!!!!!!!!!!!
       ?>
       <ul class="mt-6 space-y-2 tracking-wide">
         <li class="min-w-max">
@@ -107,7 +108,7 @@
          } else {
             echo "text-gray-600";
          }
-         ?>">
+         ?> element-hover-sidebar" style="visibility:hidden">
             <svg class="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
               <path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z" class="fill-current text-cyan-400 dark:fill-slate-600"></path>
               <path d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z" class="fill-current text-cyan-200 group-hover:text-cyan-300"></path>
@@ -126,7 +127,7 @@
          } else {
             echo "text-gray-600";
          }
-         ?>">
+         ?> element-hover-sidebar" style="visibility:hidden">
               <svg
               class="h-5 w-5"
               fill="currentColor"
@@ -147,7 +148,7 @@
          } else {
             echo "text-gray-600";
          }
-         ?>">
+         ?> element-hover-sidebar" style="visibility:hidden">
           <svg xmlns="http://www.w3.org/2000/svg" 
               fill="currentColor" 
               class="h-5 w-5" 
@@ -165,7 +166,7 @@
          } else {
             echo "text-gray-600";
          }
-         ?>">
+         ?> element-hover-sidebar" style="visibility:hidden">
              <svg 
             xmlns="http://www.w3.org/2000/svg" 
             fill="currentColor" 
@@ -185,7 +186,7 @@
          } else {
             echo "text-gray-600";
          }
-         ?>">
+         ?> element-hover-sidebar" style="visibility:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" fill-rule="evenodd" class="h-5 w-5" viewBox="0 0 16 16">
              <path class="fill-current text-gray-600 group-hover:text-cyan-600" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
              </svg>
@@ -200,7 +201,7 @@
          } else {
             echo "text-gray-600";
          }
-         ?>">
+         ?> element-hover-sidebar" style="visibility:hidden">
           <svg
               class="h-5 w-5 group-hover:fill-cyan-600"
               fill="currentColor"
@@ -225,13 +226,13 @@
          } else {
             echo "text-gray-600";
          }
-         ?>">
+         ?> element-hover-sidebar" style="visibility:hidden">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:fill-cyan-600" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
               </svg>
               <span class="group-hover:text-gray-700">Settings</span>
           </a>
-          <a href="<?= base_url('/dashboard/logout')?>" class="group when-no-hover flex items-center space-x-4  px-4 py-3 text-gray-600">
+          <a href="<?= base_url('/dashboard/logout')?>" class="group when-no-hover flex items-center space-x-4  px-4 py-3 text-gray-600 element-hover-sidebar" style="visibility:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-5 w-5 group-hover:fill-red-600" viewBox="0 0 20 20">
                  <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
                  <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>

@@ -146,9 +146,6 @@ class UserController extends BaseController
             ];
 
             if($this->request->getPost('password') != ''){
-                // $currentPass = $data['user']['password'];
-                // $pass = $this->request->getPost('current_password');
-                // $verify_pass = password_verify($pass, $currentPass);
                 
                 $verification += [
                     "password" => "required|min_length[3]|max_length[255]",

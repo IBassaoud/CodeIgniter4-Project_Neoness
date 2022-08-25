@@ -12,13 +12,13 @@ class DashboardController extends BaseController
         // Show all users
         $userModel = model(UserModel::class);
         $data['users'] = $userModel->findAll();
-        $data['titleUsers'] = "Listes de tout les utilisateurs";
+        $data['titleUsers'] = "Liste de tout les utilisateurs";
         
         
         // Show all activities
         $activitiesModel = model(ActivitiesModel::class);
         $data['activities'] = $activitiesModel->findAll();
-        $data['titleActivities'] = "Listes de toutes les activités";
+        $data['titleActivities'] = "Liste de toutes les activités";
 
         // // Show all news
         // $this->table = "NEWS";
@@ -35,13 +35,87 @@ class DashboardController extends BaseController
     public function users()
     {
         $data = array();
+        helper(['form']);
         // Show all users
         $userModel = model(UserModel::class);
         $data['users'] = $userModel->findAll();
-        $data['titleUsers'] = "Listes de tout les utilisateurs";
+        $data['titleUsers'] = "Liste de tout les utilisateurs";
+        $action = $this->request->getPost("action");
+        $actionForm = $this->request->getPost("actionform");
+        $id = $this->request->getPost("id");
 
+        if ($this->request->getMethod() == 'post' && $actionForm === "edit"){  
+            // $verification = [
+            //     "id" => "required|min_length[1]",
+            //     "firstname" => "required|min_length[3]|max_length[255]",
+            //     "lastname" => "required|min_length[3]|max_length[255]",
+            //     "age" => "required|max_length[3]",
+            //     "phone" => "required|min_length[8]|max_length[20]",
+            //     "height" => "required|max_length[3]",
+            //     "weight" => "required|max_length[5]",
+            //     "weight_target" => "max_length[5]"
+            // ];
+
+            // if (! $this->validate($verification)){
+            //     $data['validation'] = $this->validator;
+            // } else {
+                $editUser = array(
+                    "id" => $id,
+                    "email" => $this->request->getPost('email'),
+                    "firstname" => $this->request->getPost('firstname'),
+                    "lastname" => $this->request->getPost('lastname'),
+                    "age" => $this->request->getPost('age'),
+                    "phone" => $this->request->getPost('phone'),
+                    "height" => $this->request->getPost('height'),
+                    "weight" => $this->request->getPost('weight'),
+                    "weight_target" => $this->request->getPost('weight_target'),
+                    "bmi" => $this->request->getPost('bmi'),
+                    "role" => $this->request->getPost('role')
+                );
+
+                $data['dataAction'] = $editUser;
+                $userModel->update($id, $editUser);
+                $_POST['action'] = 'edit';
+                $action = 'edit';
+                session()->setFlashdata('success','Successfully edited');
+        }
+        // }
+
+
+        if ($this->request->getMethod() == 'post'){            
+            $user = $userModel->where('id',$id)->first();
+
+            
+            // If the action desired the front end client is to visualize the details of the user do...
+            if ($action === "visualize"){
+                $data['dataAction'] = $user;
+                $data['users'] = $userModel->findAll();
+            }
+            
+            // If the action desired the front end client is to edit the details of the user...
+            if ($action === "edit"){
+                $data['dataAction'] = $user;
+                $data['users'] = $userModel->findAll();
+            }
+
+            // If the action desired the front end client is to delete the user...
+            if ($action === "delete"){
+                $userModel->delete(['id' => $id]);
+                $data['users'] = $userModel->findAll();
+                session()->setFlashdata('successDelete','Successfully deleted the user');
+
+
+            }
+        }
         echo view('admin/header', $data);
         echo view('admin/users/list');
+
+        if ($action === "visualize"){
+            echo view('admin/users/visualize');
+        }
+        if ($action === "edit"){
+            echo view('admin/users/edit');
+        }
         echo view('admin/footer');
     }
 
@@ -58,7 +132,7 @@ class DashboardController extends BaseController
         // Show all activities
         $activitiesModel = model(ActivitiesModel::class);
         $data['activities'] = $activitiesModel->findAll();
-        $data['titleActivities'] = "Listes de toutes les activités";
+        $data['titleActivities'] = "Liste de toutes les activités";
 
         echo view('admin/header', $data);
         echo view('admin/activities/list');
@@ -78,7 +152,7 @@ class DashboardController extends BaseController
         // Show all news
         $userModel = model(UserModel::class);
         $data['news'] = $userModel->findAll();
-        $data['titleNews'] = "Listes de tout les News";
+        $data['titleNews'] = "Liste de tout les News";
 
         echo view('admin/header', $data);
         echo view('admin/news/list');
@@ -98,7 +172,7 @@ class DashboardController extends BaseController
         // Show all news
         $userModel = model(UserModel::class);
         $data['news'] = $userModel->findAll();
-        $data['titleNews'] = "Listes de tout les News";
+        $data['titleNews'] = "Liste de tout les News";
 
         echo view('admin/header', $data);
         echo view('admin/clubs/list');
@@ -118,7 +192,7 @@ class DashboardController extends BaseController
         // Show all news
         $userModel = model(UserModel::class);
         $data['news'] = $userModel->findAll();
-        $data['titleNews'] = "Listes de tout les News";
+        $data['titleNews'] = "Liste de tout les News";
 
         echo view('admin/header', $data);
         echo view('admin/formules/list');
