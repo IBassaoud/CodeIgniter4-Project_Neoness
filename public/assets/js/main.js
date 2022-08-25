@@ -57,3 +57,8 @@ function calculateBMI(){
     }
     
 }
+
+
+
+// Hover sidebar
+

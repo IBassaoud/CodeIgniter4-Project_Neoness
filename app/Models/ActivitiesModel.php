@@ -6,7 +6,18 @@ use CodeIgniter\Model;
 class ActivitiesModel extends Model
 {
     protected $table = 'ACTIVITIES';
-    protected $allowedFields = array('id','name','spend_calories','person_weight','created_at','updated_at');
+    // protected $allowedFields = array('id','name','spend_calories','person_weight','created_at','updated_at');
+    protected $allowedFields = array(
+        'id',
+        'name',
+        'cat_weight_1','cat_burned_cal_1',
+        'cat_weight_1','cat_burned_cal_1',
+        'cat_weight_1','cat_burned_cal_1',
+        'cat_weight_1','cat_burned_cal_1',
+        'cat_weight_1','cat_burned_cal_1',
+        'cat_weight_1','cat_burned_cal_1',
+        'created_at',
+        'updated_at');
     protected $beforeInsert = ['beforeInsert'];
     protected $beforeUpdate = ['beforeUpdate'];
     

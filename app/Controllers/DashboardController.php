@@ -12,13 +12,13 @@ class DashboardController extends BaseController
         // Show all users
         $userModel = model(UserModel::class);
         $data['users'] = $userModel->findAll();
-        $data['titleUsers'] = "Listes de tout les utilisateurs :";
+        $data['titleUsers'] = "Listes de tout les utilisateurs";
         
         
         // Show all activities
         $activitiesModel = model(ActivitiesModel::class);
         $data['activities'] = $activitiesModel->findAll();
-        $data['titleActivities'] = "Listes de toutes les activités :";
+        $data['titleActivities'] = "Listes de toutes les activités";
 
         // // Show all news
         // $this->table = "NEWS";
@@ -31,13 +31,107 @@ class DashboardController extends BaseController
         echo view('admin/footer');
     }
 
-    public function view($slug = null)
+    // Return all users 
+    public function users()
     {
-        $model = model(NewsModel::class);
+        $data = array();
+        // Show all users
+        $userModel = model(UserModel::class);
+        $data['users'] = $userModel->findAll();
+        $data['titleUsers'] = "Listes de tout les utilisateurs";
 
-        $data['news'] = $model->getNews($slug);
+        echo view('admin/header', $data);
+        echo view('admin/users/list');
+        echo view('admin/footer');
     }
 
+    // return one specific user
+    public function getUser()
+    {
+        
+    }
+    
+    // Return all activities 
+    public function activities()
+    {
+        $data = array();
+        // Show all activities
+        $activitiesModel = model(ActivitiesModel::class);
+        $data['activities'] = $activitiesModel->findAll();
+        $data['titleActivities'] = "Listes de toutes les activités";
+
+        echo view('admin/header', $data);
+        echo view('admin/activities/list');
+        echo view('admin/footer');
+    }
+    
+    // return one specific activity
+    public function getActivity()
+    {
+
+    }
+    
+    // Return all news
+    public function news()
+    {
+        $data = array();
+        // Show all news
+        $userModel = model(UserModel::class);
+        $data['news'] = $userModel->findAll();
+        $data['titleNews'] = "Listes de tout les News";
+
+        echo view('admin/header', $data);
+        echo view('admin/news/list');
+        echo view('admin/footer');
+    }
+    
+    // return one specific New
+    public function getNew()
+    {
+
+    }
+
+    // Return all Clubs
+    public function clubs()
+    {
+        $data = array();
+        // Show all news
+        $userModel = model(UserModel::class);
+        $data['news'] = $userModel->findAll();
+        $data['titleNews'] = "Listes de tout les News";
+
+        echo view('admin/header', $data);
+        echo view('admin/clubs/list');
+        echo view('admin/footer');
+    }
+    
+    // return one specific New
+    public function getClub()
+    {
+
+    }
+
+    // Return all Formules
+    public function formules()
+    {
+        $data = array();
+        // Show all news
+        $userModel = model(UserModel::class);
+        $data['news'] = $userModel->findAll();
+        $data['titleNews'] = "Listes de tout les News";
+
+        echo view('admin/header', $data);
+        echo view('admin/formules/list');
+        echo view('admin/footer');
+    }
+    
+    // return one specific New
+    public function getFormule()
+    {
+
+    }
+
+    // Login validation method
     public function login()
     {
         $data = array();
@@ -52,7 +146,7 @@ class DashboardController extends BaseController
 
             $errors = [
                 'password' => [
-                    'validateAdmin' => 'You have nothing to do here, gentleman'
+                    'validateAdmin' => 'Email or password is incorrect'
                 ],
             ];
 
@@ -61,10 +155,6 @@ class DashboardController extends BaseController
             } else {
                 $model = model(DashboardModel::class);
                 $email = $this->request->getVar('email');
-                // $data['email'] = $this->request->getVar('email');
-                // $user = $model->where('email',$data['email'])->first();
-                // var_dump($user);
-                // exit;
                 $user = $model->where('email',$email)
                               ->first();
 
@@ -74,9 +164,7 @@ class DashboardController extends BaseController
             }
         }
 
-        echo view('admin/header', $data);
-        echo view('admin/login');
-        echo view('admin/footer');
+        echo view('admin/login', $data);
     }
 
     private function setUserSession($user)

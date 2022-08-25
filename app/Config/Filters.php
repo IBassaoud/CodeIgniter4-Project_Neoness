@@ -10,6 +10,8 @@ use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use App\Filters\AuthFilter;
 use App\Filters\NoAuthFilter;
+use App\Filters\AuthAdminFilter;
+use App\Filters\NoAuthAdminFilter;
 
 class Filters extends BaseConfig
 {
@@ -28,6 +30,8 @@ class Filters extends BaseConfig
         // specify my new filters 
         'AuthFilter' => AuthFilter::class,
         'NoAuthFilter' => NoAuthFilter::class,
+        'AuthAdminFilter' => AuthAdminFilter::class,
+        'NoAuthAdminFilter' => NoAuthAdminFilter::class,
     ];
 
     /**

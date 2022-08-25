@@ -69,10 +69,6 @@ class UserController extends BaseController
     
     public function register()
     {
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
-        // exit;
         $data = array();
         helper(['form']);
 
