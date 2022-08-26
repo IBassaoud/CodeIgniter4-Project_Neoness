@@ -29,9 +29,18 @@ class UserController extends BaseController
                 $data['validation'] = $this->validator;
             } else {
                 $model = model(UserModel::class);
-
-                $user = $model->where('email', $this->request->getVar('email'))
-                              ->first();
+                // TODO : Clean code : This should be removed for : 
+                // $this->getUser(['table'=> 'valueSearched])
+                // $this->getUser(['email'=> '$this->request->get('email')']);
+                // getUser($arg)
+                // {
+                // if (is_array($arg)){
+                //$table = array_keys($arg)
+                //$val = $arg[0];
+                //return $model->where($table, $val)->first();
+                // }
+                // }
+                $user = $model->where('email', $this->request->getVar('email'))->first();
 
                 
                 $this->setUserSession($user);
@@ -118,7 +127,7 @@ class UserController extends BaseController
 
     }
 
-    public function profile()
+    public function board()
     {
         $data = array();
         helper(['form']);
@@ -167,26 +176,43 @@ class UserController extends BaseController
                     "weight" => $this->request->getPost('weight'),
                     "weight_target" => $this->request->getPost('weight_target'),
                     "bmi" => $this->request->getPost('bmi')
+                    
                 );
 
                 if($this->request->getPost('password') != ''){
                     $updateUser['password'] = $this->request->getPost('password');
                 }
 
-                $model->update($id, $updateUser);
+                // $model->update($id, $updateUser);
 
-                $session = session();
-                $session->set($updateUser);
-                $session->setFlashdata('success','Successfully updated');
-                return redirect()->to('profile');
+                $this->updateUser($id, $updateUser);
+                
+                // $session = session();
+                // $session->set($updateUser);
+                // $session->setFlashdata('success','Successfully updated');
+                return redirect()->to('board');
             }
         }
 
         echo view('header', $data);
-        echo view('user/profile');
+        echo view('user/sidebar');
+        echo view('user/board');
         echo view('footer');
     }
 
+    private function updateUser($id, $data)
+    {
+
+        $model = model(UserModel::class);
+        $model->update($id, $data);
+
+        $session = session();
+        $session->set($data);
+        $session->setFlashdata('success','Successfully updated');
+
+    }
+
+    
     public function logout()
     {
         session()->destroy();
@@ -196,10 +222,6 @@ class UserController extends BaseController
     public function getUser($id = null)
     {
         $model = model(UserModel::class);
-
-        if(isset($_GET['id'])){
-            $id = $_GET['id'];
-        }
 
         if ($id != null){
             $id = $id;
@@ -227,5 +249,110 @@ class UserController extends BaseController
         echo view('footer');
     }
 
+    ########### PROFILE BOARD USER METHODS ##########
+    // $routes->match(['get','post'],'board/workout', 'UserController::workout', ['filter' => "AuthFilter"]);
+    // $routes->match(['get','post'],'board/progression', 'UserController::progression', ['filter' => "AuthFilter"]);
+    // $routes->match(['get','post'],'board/inbox', 'UserController::inbox', ['filter' => "AuthFilter"]);
+    // $routes->match(['get','post'],'board/account', 'UserController::account', ['filter' => "AuthFilter"]);
 
+    public function workout()
+    {  
+    
+        return view('header')
+            . view('user/sidebar')
+            . view('user/workout')
+            . view('footer');
+
+    }
+
+    public function progression()
+    {  
+    
+        return view('header')
+            . view('user/sidebar')
+            . view('user/progression')
+            . view('footer');
+
+    }
+
+    public function inbox()
+    {  
+    
+        return view('header')
+            . view('user/sidebar')
+            . view('user/inbox')
+            . view('footer');
+
+    }
+
+    public function account()
+    {  
+        $data = array();
+        helper(['form']);
+        
+        $id = session()->get('id');
+        if ($this->request->getMethod() == 'post'){
+            // If true, do the validation 
+            $verification = [
+                "firstname" => "required|min_length[3]|max_length[255]",
+                "lastname" => "required|min_length[3]|max_length[255]",
+                "age" => "required|max_length[3]",
+                "phone" => "required|min_length[8]|max_length[20]",
+                "height" => "required|max_length[3]",
+                "weight" => "required|max_length[5]",
+                "weight_target" => "max_length[5]"
+            ];
+
+            $errorsUpdate = [
+                'current_password' => [
+                    'validateCurrentPass' => 'Current password is incorrect'
+                ],
+            ];
+
+            if($this->request->getPost('password') != ''){
+                
+                $verification += [
+                    "password" => "required|min_length[3]|max_length[255]",
+                    "repeat_password" => "matches[password]",
+                    "current_password" => "validateCurrentPass[current_password]",
+                ];                
+            }
+
+            if (! $this->validate($verification,$errorsUpdate)){
+                $data['validation'] = $this->validator;
+            } else {
+                $updateUser = array(
+                    "id" => $id,
+                    "firstname" => $this->request->getPost('firstname'),
+                    "lastname" => $this->request->getPost('lastname'),
+                    "age" => $this->request->getPost('age'),
+                    "phone" => $this->request->getPost('phone'),
+                    "height" => $this->request->getPost('height'),
+                    "weight" => $this->request->getPost('weight'),
+                    "weight_target" => $this->request->getPost('weight_target'),
+                    "bmi" => $this->request->getPost('bmi')
+                    
+                );
+
+                if($this->request->getPost('password') != ''){
+                    $updateUser['password'] = $this->request->getPost('password');
+                }
+
+                // $model->update($id, $updateUser);
+
+                $this->updateUser($id, $updateUser);
+                
+                // $session = session();
+                // $session->set($updateUser);
+                // $session->setFlashdata('success','Successfully updated');
+                return redirect()->to('board/account');
+            }
+        }
+
+        return view('header')
+            . view('user/sidebar')
+            . view('user/account')
+            . view('footer');
+
+    }
 }

@@ -1,3 +1,12 @@
+<?php
+$SEG = service('uri');
+$seg = $SEG->getSegment(1);
+// if the ressource requested is the profile board then echo the closing tag of main 
+if ($seg === 'board'){
+  echo "</main>";
+}
+?>
+
 <footer class="text-gray-600 body-font mt-auto">
   <div class="container px-5 py-12 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
     <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left md:mt-0 mt-10">

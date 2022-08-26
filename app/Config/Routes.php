@@ -49,24 +49,36 @@ $routes->get('users', 'UserController::getUsers');
 // $routes->get('users/::id', 'UserController::getOne');
 $routes->match(['get','post'],'/', 'UserController::index', ['filter' => "NoAuthFilter"]);
 $routes->match(['get','post'],'register', 'UserController::register', ['filter' => "NoAuthFilter"]);
-$routes->match(['get','post'],'profile', 'UserController::profile', ['filter' => "AuthFilter"]);
 $routes->get('logout', 'UserController::logout');
 
-// $routes->get('dashboard/::id', 'DashboardController::getOne');
+// User profile board 
+$routes->get('board', 'UserController::board', ['filter' => "AuthFilter"]);
+$routes->match(['get','post'],'board/workout', 'UserController::workout', ['filter' => "AuthFilter"]);
+$routes->match(['get','post'],'board/progression', 'UserController::progression', ['filter' => "AuthFilter"]);
+$routes->match(['get','post'],'board/inbox', 'UserController::inbox', ['filter' => "AuthFilter"]);
+$routes->match(['get','post'],'board/account', 'UserController::account', ['filter' => "AuthFilter"]);
+
+// Dashboard admin routes
 $routes->get('dashboard', 'DashboardController::index', ['filter' => "AuthAdminFilter"]);
 $routes->match(['get','post'],'dashboard/login', 'DashboardController::login', ['filter' => "NoAuthAdminFilter"]);
 $routes->match(['get','post'],'dashboard/profile', 'DashboardController::profile', ['filter' => "AuthAdminFilter"]);
 $routes->get('dashboard/logout', 'DashboardController::logout');
+
 // Users tab
 $routes->match(['get','post'],'dashboard/users', 'DashboardController::users', ['filter' => "AuthAdminFilter"]);
+
 // Activities tab 
 $routes->match(['get','post'],'dashboard/activities', 'DashboardController::activities', ['filter' => "AuthAdminFilter"]);
+
 // News tab 
 $routes->match(['get','post'],'dashboard/news', 'DashboardController::news', ['filter' => "AuthAdminFilter"]);
+
 // Clubs tab 
 $routes->match(['get','post'],'dashboard/clubs', 'DashboardController::clubs', ['filter' => "AuthAdminFilter"]);
+
 // Formules tab 
 $routes->match(['get','post'],'dashboard/formules', 'DashboardController::formules', ['filter' => "AuthAdminFilter"]);
+
 // Settings tab 
 $routes->match(['get','post'],'dashboard/settings', 'DashboardController::settings', ['filter' => "AuthAdminFilter"]);
 
@@ -82,7 +94,7 @@ $routes->get('news', 'NewsController::index');
 // Clubs route
 $routes->get('clubs', 'ClubsController::index');
 
-// Clubs route
+// Coaching route
 $routes->get('coaching', 'CoachingController::index');
 
 // formules route

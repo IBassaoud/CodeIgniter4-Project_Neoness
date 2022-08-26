@@ -19,7 +19,7 @@ if($segmentTitle == ''){
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
     <link rel="icon" type="ico" href="public/favicon.ico">
     <!-- <link href="dist/tailwind.css" rel="stylesheet"> -->
-    <script src="public/assets/js/main.js"></script>
+    <script src="<?= base_url()?>/public/assets/js/main.js" defer></script>
     
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -80,7 +80,7 @@ if($segmentTitle == ''){
           if (session()->get('isLoggedIn')){
             ?>
             <li>
-              <a href="<?= base_url('profile')?>" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-black dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</a>
+              <a href="<?= base_url('board')?>" class="block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-black dark:hover:bg-blue-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</a>
             </li>
             <?php if (session()->get('role') === "Administrator"):?>
             <li>
