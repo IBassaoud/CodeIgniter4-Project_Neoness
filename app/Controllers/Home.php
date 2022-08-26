@@ -9,8 +9,8 @@ class Home extends BaseController
         if ($id !== null){
             $data['id'] = $id;
         }
-        echo view('template/header', $data);
+        echo view('header', $data);
         echo view('Home');
-        echo view('template/footer');
+        echo view('footer');
     }
 }

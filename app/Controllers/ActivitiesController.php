@@ -8,9 +8,9 @@ class ActivitiesController extends BaseController
                 
         $data = array();
         $data['catch_phrase'] = "<h2>All the activities are printed here for your good health obviously, yes we do care !</h2>";
-        echo view('template/header',$data);
+        echo view('header',$data);
         echo view('Home');
-        echo view('template/footer');
+        echo view('footer');
     }
 
     public function getActivity($id = null)
@@ -27,13 +27,13 @@ class ActivitiesController extends BaseController
 
         $data = $model->findActivities($id);
 
-        if (empty($data['activities'])) {
+        if (empty($data)) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the activity : ' . $id);
         }
 
-        echo view('template/header',$data);
+        echo view('header',$data);
         echo view('activities/detail');
-        echo view('template/footer');
+        echo view('footer');
     }
 
     public function getActivities()
@@ -42,8 +42,8 @@ class ActivitiesController extends BaseController
 
         $data = $model->findActivities();
 
-        echo view('template/header',$data);
+        echo view('header',$data);
         echo view('activities/list');
-        echo view('template/footer');
+        echo view('footer');
     }
 }

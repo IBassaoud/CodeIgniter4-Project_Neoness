@@ -38,9 +38,9 @@ class UserController extends BaseController
                 return redirect()->to('home');
             }
         }
-        echo view('template/header', $data);
+        echo view('header', $data);
         echo view('authentification/login');
-        echo view('template/footer');
+        echo view('footer');
     }
 
     private function setUserSession($user)
@@ -112,9 +112,9 @@ class UserController extends BaseController
             }
         }
 
-        echo view('template/header', $data);
+        echo view('header', $data);
         echo view('authentification/register');
-        echo view('template/footer');
+        echo view('footer');
 
     }
 
@@ -182,9 +182,9 @@ class UserController extends BaseController
             }
         }
 
-        echo view('template/header', $data);
+        echo view('header', $data);
         echo view('user/profile');
-        echo view('template/footer');
+        echo view('footer');
     }
 
     public function logout()
@@ -211,9 +211,9 @@ class UserController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Cannot find the user : ' . $id);
         }
 
-        echo view('template/header',$data);
+        echo view('header',$data);
         echo view('user/detail');
-        echo view('template/footer');
+        echo view('footer');
     }
 
     public function getUsers()
@@ -222,9 +222,9 @@ class UserController extends BaseController
 
         $data = $model->findUsers();
 
-        echo view('template/header',$data);
+        echo view('header',$data);
         echo view('user/list');
-        echo view('template/footer');
+        echo view('footer');
     }
 
 

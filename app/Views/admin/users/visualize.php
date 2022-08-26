@@ -5,13 +5,8 @@ $action = $_POST['action'];
 ?>
 <div class="container mx-auto px-4 md:max-w-xl">
 <h1 class="mt-6 mb-4 text-center text-3xl font-extrabold text-gray-900">
-					EDIT USER
+					DETAIL USER
 </h1>
-<?php if (session()->get('success')): ?>
-    <div class='text-center text-green-500 text-1xl font-bold'>
-    <?= session()->get('success'); ?>
-    </div>
-<?php endif; ?>
 <form action="<?= base_url('/dashboard/users')?>" method="POST">
   <!-- <div class="relative z-0 mb-6 w-full group">
       <input type="email" name="email" id="email" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-gray-900 dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " >

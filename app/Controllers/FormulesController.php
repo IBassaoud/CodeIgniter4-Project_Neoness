@@ -8,8 +8,8 @@ class FormulesController extends BaseController
                 
         $data = array();
         $data['catch_phrase'] = "<h2>Formule here in order to milk people</h2>";
-        echo view('template/header',$data);
+        echo view('header',$data);
         echo view('Home');
-        echo view('template/footer');
+        echo view('footer');
     }
 }

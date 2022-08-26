@@ -38,17 +38,9 @@ class ActivitiesModel extends Model
             $data['activities'] = $this->findAll();
             $data['title'] = "Listes de tout les activités sportives";
         } else {
-            $data['activities'] = $this->where(['id' => $id])->first();
+            $data['activity'] = $this->where(['id' => $id])->first();
             // setting a length of 1 in case it returns only one user
-            $data['length'] = 1;
             $data['title'] = "Ton activité préféré";
-        }
-
-        
-        if (isset($data['length'])){
-            $length = $data['length'];
-        } else {
-            $data['length'] = sizeof($data['activities']);
         }
 
         return $data;

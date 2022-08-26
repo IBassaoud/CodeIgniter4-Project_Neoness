@@ -36,29 +36,18 @@ class DashboardController extends BaseController
     {
         $data = array();
         helper(['form']);
+
         // Show all users
         $userModel = model(UserModel::class);
         $data['users'] = $userModel->findAll();
+        $data['users'] = $this->rtrimZeroAndDot($data['users'], "users");
         $data['titleUsers'] = "Liste de tout les utilisateurs";
+
         $action = $this->request->getPost("action");
         $actionForm = $this->request->getPost("actionform");
         $id = $this->request->getPost("id");
 
-        if ($this->request->getMethod() == 'post' && $actionForm === "edit"){  
-            // $verification = [
-            //     "id" => "required|min_length[1]",
-            //     "firstname" => "required|min_length[3]|max_length[255]",
-            //     "lastname" => "required|min_length[3]|max_length[255]",
-            //     "age" => "required|max_length[3]",
-            //     "phone" => "required|min_length[8]|max_length[20]",
-            //     "height" => "required|max_length[3]",
-            //     "weight" => "required|max_length[5]",
-            //     "weight_target" => "max_length[5]"
-            // ];
-
-            // if (! $this->validate($verification)){
-            //     $data['validation'] = $this->validator;
-            // } else {
+        if ($this->request->getMethod() == 'post' && $actionForm === "edit"){ 
                 $editUser = array(
                     "id" => $id,
                     "email" => $this->request->getPost('email'),
@@ -75,7 +64,7 @@ class DashboardController extends BaseController
 
                 $data['dataAction'] = $editUser;
                 $userModel->update($id, $editUser);
-                $_POST['action'] = 'edit';
+                // $_POST['action'] = 'edit';
                 $action = 'edit';
                 session()->setFlashdata('success','Successfully edited');
         }
@@ -90,18 +79,23 @@ class DashboardController extends BaseController
             if ($action === "visualize"){
                 $data['dataAction'] = $user;
                 $data['users'] = $userModel->findAll();
+                $data['users'] = $this->rtrimZeroAndDot($data['users'], "users");
+                $data['dataAction'] = $this->rtrimZeroAndDot($data['dataAction'], "user");
             }
             
             // If the action desired the front end client is to edit the details of the user...
             if ($action === "edit"){
                 $data['dataAction'] = $user;
                 $data['users'] = $userModel->findAll();
+                $data['users'] = $this->rtrimZeroAndDot($data['users'], "users");
+                $data['dataAction'] = $this->rtrimZeroAndDot($data['dataAction'], "user");
             }
 
             // If the action desired the front end client is to delete the user...
             if ($action === "delete"){
                 $userModel->delete(['id' => $id]);
                 $data['users'] = $userModel->findAll();
+                $data['users'] = $this->rtrimZeroAndDot($data['users'],"users");
                 session()->setFlashdata('successDelete','Successfully deleted the user');
 
 
@@ -269,6 +263,31 @@ class DashboardController extends BaseController
     {
         session()->destroy();
         return redirect()->to('/dashboard/login');
+    }
+
+    private function rtrimZeroAndDot($data, string $usr)
+    {
+        if($usr === "users"){
+        $length = sizeof($data);
+        for ($i = 0 ; $i < $length ; $i++) {
+            $data[$i]['weight'] = rtrim($data[$i]['weight'], 0);
+            $data[$i]['weight'] = rtrim($data[$i]['weight'], ".");
+            $data[$i]['weight_target'] = rtrim($data[$i]['weight_target'], 0);
+            $data[$i]['weight_target'] = rtrim($data[$i]['weight_target'], ".");
+            $data[$i]['bmi'] = rtrim($data[$i]['bmi'], 0);
+            $data[$i]['bmi'] = rtrim($data[$i]['bmi'], ".");
+        }
+        } 
+        if ($usr === 'user') {
+            $data['weight'] = rtrim($data['weight'], 0);
+            $data['weight'] = rtrim($data['weight'], ".");
+            $data['weight_target'] = rtrim($data['weight_target'], 0);
+            $data['weight_target'] = rtrim($data['weight_target'], ".");
+            $data['bmi'] = rtrim($data['bmi'], 0);
+            $data['bmi'] = rtrim($data['bmi'], ".");
+        }
+
+        return $data;
     }
 
 }

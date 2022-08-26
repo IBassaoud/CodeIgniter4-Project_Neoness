@@ -27,6 +27,16 @@ if($segmentTitle == ''){
     body {
         font-family: 'Roboto', cursive;
     }
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .overflow-y-scroll::-webkit-scrollbar {
+         display: none;
+      }
+
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .overflow-y-scroll {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+      }
     </style>
 
     <title>NeoNess | <?= $titlePage ?></title>

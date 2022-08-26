@@ -4,11 +4,11 @@ $action = $_POST['action'];
 }
 ?>
 <div class="container mx-auto px-4 md:max-w-xl">
-<h1 class="mt-6 mb-4 text-center text-3xl font-extrabold text-gray-900">
+<h1 class="mt-6 mb-2 text-center text-3xl font-extrabold text-gray-900">
 					EDIT USER
 </h1>
 <?php if (session()->get('success')): ?>
-    <div class='text-center text-green-500 text-1xl font-bold'>
+    <div class='text-center mb-4 text-green-500 text-1xl font-bold'>
     <?= session()->get('success'); ?>
     </div>
 <?php endif; ?>
